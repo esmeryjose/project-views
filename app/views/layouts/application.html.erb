@@ -3,12 +3,24 @@
   <head>
     <title>Views</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <ul>
+      <li><a href="#Views">Home</a></li>
+      <li><%link_to "profile page", user_path(current_user) if current_user %></li>
+      <li><a href="#contact">Friend Requests</a></li>
+      <li><a href="#search">Search<input type="text" name="search" value=""></a></li>
+      <% if current_user %>
+        <li><%= link_to "Log Out", destroy_user_session_path, method: :delete%></li>
+      <% else %>
+        <li><%= link_to "Sign In", user_session_path %></li>
+      <% end %>
+    </ul>
+
+
     <%= yield %>
   </body>
 </html>

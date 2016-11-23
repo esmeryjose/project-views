@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114163402) do
+ActiveRecord::Schema.define(version: 20161123211308) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "picture_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -25,11 +27,17 @@ ActiveRecord::Schema.define(version: 20161114163402) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_pictures", force: :cascade do |t|
+  create_table "pictures", force: :cascade do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
+  end
+
+  create_table "pictures_tags", force: :cascade do |t|
+    t.integer "picture_id"
+    t.integer "tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -54,6 +62,7 @@ ActiveRecord::Schema.define(version: 20161114163402) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
+    t.string   "quote"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
